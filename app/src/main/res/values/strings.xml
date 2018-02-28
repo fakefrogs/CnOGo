@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">CnO Go</string>
+    <string name="choose_character">Choose a Character</string>
+    <string name="button_details">Details</string>
+    <string name="clyde">Clyde</string>
+    <string name="owen">Owen</string>
+    <string name="abilities_title">Character abilities</string>
+    <string name="ability_1">Ability 1</string>
+    <string name="ability_2">Ability 2</string>
+    <string name="ability_3">Ability 3</string>
+    <string name="vs">VS</string>
+    <string name="button_play">Play</string>
+    <string name="combat_info_text">Combat information text</string>
+    <string name="title_victory">Victory</string>
+    <string name="title_defeat">Defeat</string>
+    <string name="button_play_again">Play again</string>
+    <string name="button_opponent_select">Opponent select</string>
+    <string name="button_character_select">Character select</string>
+</resources>

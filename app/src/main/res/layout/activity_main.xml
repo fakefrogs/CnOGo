@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cno_go_background"
+    android:visibility="visible"
+    tools:context="com.example.fake_frogs.cnogo.MainActivity">
+
+    <Button
+        android:id="@+id/buttonDetailsClyde"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="112dp"
+        android:text="@string/button_details"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonDetailsOwen"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonDetailsOwen"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="112dp"
+        android:text="@string/button_details"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonClyde"
+        android:layout_width="130dp"
+        android:layout_height="195dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="112dp"
+        android:backgroundTint="?android:attr/panelBackground"
+        android:paddingHorizontal="0dp"
+        android:paddingVertical="0dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDetailsClyde"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/clyde_select" />
+
+    <ImageButton
+        android:id="@+id/buttonOwen"
+        android:layout_width="130dp"
+        android:layout_height="195dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="112dp"
+        android:backgroundTint="?android:attr/panelBackground"
+        android:paddingHorizontal="0dp"
+        android:paddingVertical="0dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/buttonDetailsOwen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/owen_select" />
+
+    <TextView
+        android:id="@+id/chooseCharacter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/choose_character"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textClyde"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/clyde"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textOwen"
+        app:layout_constraintEnd_toEndOf="@+id/buttonClyde"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/buttonClyde" />
+
+    <TextView
+        android:id="@+id/textOwen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/owen"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonOwen"
+        app:layout_constraintEnd_toEndOf="@+id/buttonOwen"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/buttonOwen"
+        app:layout_constraintTop_toTopOf="@+id/buttonOwen"
+        app:layout_constraintVertical_bias="0.95" />
+
+</android.support.constraint.ConstraintLayout>
