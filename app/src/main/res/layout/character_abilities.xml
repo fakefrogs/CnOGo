@@ -5,7 +5,9 @@
     android:id="@+id/layoutCharacterAbilities"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/scrollbarThumbHorizontal">
+    android:background="?android:attr/scrollbarThumbHorizontal"
+    android:clickable="true"
+    android:onClick="backToCharacters">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="300dp"

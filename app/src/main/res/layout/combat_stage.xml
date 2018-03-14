@@ -126,6 +126,7 @@
             android:id="@+id/buttonAlilityOne"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
+            android:onClick="buttonOne"
             android:text="@string/ability_1"
             app:layout_constraintBottom_toTopOf="@+id/textCombatInfo"
             app:layout_constraintStart_toStartOf="parent"
@@ -136,6 +137,7 @@
             android:id="@+id/buttonAbilityTwo"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
+            android:onClick="buttonTwo"
             android:text="@string/ability_2"
             app:layout_constraintBottom_toTopOf="@+id/textCombatInfo"
             app:layout_constraintEnd_toStartOf="@+id/buttonAbilityThree"
@@ -147,6 +149,7 @@
             android:id="@+id/buttonAbilityThree"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
+            android:onClick="buttonThree"
             android:text="@string/ability_3"
             app:layout_constraintBottom_toTopOf="@+id/textCombatInfo"
             app:layout_constraintEnd_toEndOf="parent"
@@ -154,4 +157,21 @@
             app:layout_constraintVertical_bias="1.0" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Temporary message:Tap all three ability buttons to proceed to end match screen."
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
 </android.support.constraint.ConstraintLayout>

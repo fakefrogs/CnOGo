@@ -48,6 +48,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:onClick="playMatch"
         android:text="@string/button_play"
         android:textColor="@android:color/black"
         android:textSize="18sp"
