@@ -16,4 +16,6 @@
     <string name="button_play_again">Play again</string>
     <string name="button_opponent_select">Opponent select</string>
     <string name="button_character_select">Character select</string>
+    <string name="stats">Stats</string>
+    <string name="return_back">Return</string>
 </resources>
