@@ -35,10 +35,12 @@ public class EndMatch extends AppCompatActivity {
         if (winner) {
             if (checkFile(this, statsTxt)) {
                 //Toast.makeText(this,"File found.", Toast.LENGTH_LONG).show();
+                Log.i("INFO", "File found");
                 UpdateStats();
             }
             else {
-                Toast.makeText(this, "File not found.", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "File not found.", Toast.LENGTH_LONG).show();
+                Log.i("ERROR", "File not found");
             }
         }
     }
@@ -94,10 +96,10 @@ public class EndMatch extends AppCompatActivity {
                     statString = "Clyde Clone";
                     break;
                 case 8:
-                    statString = "CharOne";
+                    statString = "Carl";
                     break;
                 case 9:
-                    statString = "CharTwo";
+                    statString = "Cat Person";
                     break;
             }//end Switch statement
 
@@ -137,7 +139,8 @@ public class EndMatch extends AppCompatActivity {
                     outputStream = openFileOutput(statsTxt, Context.MODE_PRIVATE);
                     outputStream.write(line.getBytes());
                     outputStream.close();
-                    Toast.makeText(this,"File was saved",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this,"File was saved",Toast.LENGTH_LONG).show();
+                    Log.i("INFO", "File was saved");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

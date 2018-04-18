@@ -4,6 +4,7 @@ package com.example.fake_frogs.cnogo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,8 +18,8 @@ public class OpponentSelectActivity extends AppCompatActivity {
     private static final int GRIM_REAPER = 5;
     private static final int THE_CONTROLLER = 6;
     private static final int CLYDE_CLONE = 7;
-    private static final int CHAR_ONE = 8;
-    private static final int CHAR_TWO = 9;
+    private static final int CARL = 8;
+    private static final int CAT_PERSON = 9;
     private int character = 0;
     private int opponent = 0;
     @Override
@@ -26,16 +27,21 @@ public class OpponentSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.opponent_select);
 
-        Bundle extras = getIntent().getExtras();
+        //Bundle extras = getIntent().getExtras();
+        Log.i("INFO", "value before: " + String.valueOf(character));
+        Intent extras = getIntent();
         if (extras != null) {
-            character = extras.getInt("PlayerChar");
+            character = extras.getIntExtra("playerChar", 100);
+            Log.i("INFO", "Value after: " + String.valueOf(character));
         }
+
         if (character == 1) {
             //Display Clyde as player character
         }
         else if (character == 2) {
             //Display Owen as player character
         }
+
     }
 
     //Methods for onClick events of opponent imageButtons
@@ -47,15 +53,15 @@ public class OpponentSelectActivity extends AppCompatActivity {
 
     public void OpponentFour(View view) { opponent = SCIENTIST; Toast.makeText(this, "Scientist selected", Toast.LENGTH_SHORT).show();}
 
-    public void OpponentFive(View view) { opponent = GRIM_REAPER; Toast.makeText(this, "Grim REaper selected", Toast.LENGTH_SHORT).show();}
+    public void OpponentFive(View view) { opponent = GRIM_REAPER; Toast.makeText(this, "Grim Reaper selected", Toast.LENGTH_SHORT).show();}
 
     public void OpponentSix(View view) { opponent = THE_CONTROLLER; Toast.makeText(this, "The Controller selected", Toast.LENGTH_SHORT).show();}
 
     public void OpponentSeven(View view) { opponent = CLYDE_CLONE; Toast.makeText(this, "Clyde Clone selected", Toast.LENGTH_SHORT).show();}
 
-    public void OpponentEight(View view) { opponent = CHAR_ONE; Toast.makeText(this, "CharOne selected", Toast.LENGTH_SHORT).show();}
+    public void OpponentEight(View view) { opponent = CARL; Toast.makeText(this, "Carl selected", Toast.LENGTH_SHORT).show();}
 
-    public void OpponentNine(View view) { opponent = CHAR_TWO; Toast.makeText(this, "CharTwo selected", Toast.LENGTH_SHORT).show();}
+    public void OpponentNine(View view) { opponent = CAT_PERSON; Toast.makeText(this, "Cat Person selected", Toast.LENGTH_SHORT).show();}
 
     public void OpponentTen(View view) {
         Random rand = new Random();

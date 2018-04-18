@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import java.io.File;
@@ -21,22 +22,30 @@ public class MainActivity extends AppCompatActivity {
         String statsTxt = "stats.txt";
 
         if (checkFile(this, statsTxt)) {
-            Toast.makeText(this, "File already exists", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "File already exists", Toast.LENGTH_SHORT).show();
+            Log.i("INFO", "File already exists");
         }
         else {
             addStatsFile(statsTxt);
         }
+        Log.i("INFO", String.valueOf(CLYDE));
+        Log.i("INFO", String.valueOf(OWEN));
     }
 
     public void selectCharacter(View view) {
+        //Bundle bundle = new Bundle();
         Intent intent = new Intent(this, OpponentSelectActivity.class);
         if (view.getId() == R.id.buttonClyde) {
             intent.putExtra("playerChar", CLYDE);
+            String intentPassingValue = String.valueOf(intent.getIntExtra("playerChar", 200));
+            Log.i("INFO", intentPassingValue);
+            startActivity(intent);
         }
         else if (view.getId() == R.id.buttonOwen) {
             intent.putExtra("playerChar", OWEN);
+            startActivity(intent);
         }
-        startActivity(intent);
+
     }
 
     public void abilitiesDetails(View view) {
@@ -64,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void addStatsFile(String txtFile) {
-        String statStrings = "Victories:0:Clyde:0:Owen:0:Super Bread:0:Scientist:0:Grim Reaper:0:The Controller:0:Clyde Clone:0:CharOne:0:CharTwo:0";
+        String statStrings = "Victories:0:Clyde:0:Owen:0:Super Bread:0:Scientist:0:Grim Reaper:0:The Controller:0:Clyde Clone:0:Carl:0:Cat Person:0";
         String filename = txtFile;
         String fileContents = statStrings;
         FileOutputStream outputStream;
@@ -73,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
             outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
             outputStream.write(fileContents.getBytes());
             outputStream.close();
-            Toast.makeText(this,"File was saved",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"File was saved",Toast.LENGTH_LONG).show();
+            Log.i("INFO", "File was saved");
         } catch (Exception e) {
             e.printStackTrace();
         }

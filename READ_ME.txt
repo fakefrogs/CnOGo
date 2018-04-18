@@ -6,6 +6,30 @@ January, 2018 -- (Expected May, 2018)
 Semester project for Mobile Apps class.
 "CnO Go" is a simple combat game based on the comic series "Clyde n Owen".
 
+//--  Your Choice Project Update  --//
+  --  April, 17th 2018
+  
+Began implementation of actual gameplay.  Created a Character class to assist in 
+creating both player and opponent characters durring MatchActivity.  This class 
+receives an integer value used to determine which character should be instantiated
+(these are passed by the intent that calls the activity). As well, methods are 
+provided to access character name, ability names, and ability values.
+
+MatchActivity now has basic gameplay mechanics playable.  Code for methods that 
+process player's move, opponent's move, health and victory checks has largely been 
+implemented.  Character abilities One and Two have been implemented along with 
+hit chances and defense chances (These determine how much damage an attack will do
+and how effective the defense will be).
+
+Ability Three has not been implemented at this stage.  When the player and opponent
+use ability Three, nothing happens at this point.  Silly messages are displayed in
+the combat info textview instead.
+
+Have begun preparation for adding more visual resources for characters.  Code has
+been put in place to assign the images for each character once these images have 
+been drawn up.
+
+
 //--  Saving Data Project update  --//
   --  April, 3rd 2018
 
@@ -54,25 +78,31 @@ Layouts:        Basic layouts completed.
 				layout localization
 				
 Navigation: 	Basic navigation completed.
-				Implemented basic value passing
+				Fixed issue with value passings with intents
 				Refined navigation
-	To be done: further refine value passing
-				further refine navigation
+	To be done: adjust value passing as needed
+				further refine navigation as needed
 				
 Data storing:	Basic saved stats completed
-	To be done: further refine stat features
+				Updated some stat titles and values
+	To be done: 
+	Possible features to be added:	Medals/Awards
+									Character unlocks
 				
 
-Gameplay:		Begun implementation
-	To be done: build gameplay mechanics
+Gameplay:		Implemented player/opponent moves with supporting methods for checking
+				character health, who's turn is next, whether victory has been achieved,
+				plus other character creation and supporting methods.
+				Implemented abilities One and Two
+	To be done: Implement ability Three
+				Refine opponent decision making
 
 //--  Development notes  --//
 
-Basic layout, navigation, and data storage implemented.
+Basic layout, navigation, data storage, and some gameplay implemented.
+
+Added much of actual gameplay mechanics.  Remaining mechanics need to be implemented.
+Further refinements needed.
 
 Added a stats screen as part of implementing data storage.
 This feature is mostly complete.  Further features related to stats are planned.
-
-Because no gameplay mechanics have been implemented, in order to navigate to
-end match screen for testing purposes, ability buttons act as a shortcut.  
-Press each ability button in order to access end match screen.

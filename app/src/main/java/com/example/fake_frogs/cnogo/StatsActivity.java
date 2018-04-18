@@ -123,16 +123,16 @@ public class StatsActivity extends AppCompatActivity {//private Context context 
                     clydeCloneValue.setText(statStrings[15]);
                 }
 
-                if (statStrings[16].matches("CharOne")) {
-                    TextView charOneTitle = findViewById(R.id.charOneTitle);
-                    TextView charOneValue = findViewById(R.id.charOneValue);
+                if (statStrings[16].matches("Carl")) {
+                    TextView charOneTitle = findViewById(R.id.carlTitle);
+                    TextView charOneValue = findViewById(R.id.carlValue);
                     charOneTitle.setText(statStrings[16]);
                     charOneValue.setText(statStrings[17]);
                 }
 
-                if (statStrings[18].matches("CharTwo")) {
-                    TextView charTwoTitle = findViewById(R.id.charTwoTitle);
-                    TextView charTwoValue = findViewById(R.id.charTwoValue);
+                if (statStrings[18].matches("Cat Person")) {
+                    TextView charTwoTitle = findViewById(R.id.catPersonTitle);
+                    TextView charTwoValue = findViewById(R.id.catPersonValue);
                     charTwoTitle.setText(statStrings[18]);
                     charTwoValue.setText(statStrings[19]);
                 }
