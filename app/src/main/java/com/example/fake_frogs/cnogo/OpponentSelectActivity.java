@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Random;
 
 public class OpponentSelectActivity extends AppCompatActivity {
+    //Constants
     private static final int CLYDE = 1;
     private static final int OWEN = 2;
     private static final int SUPER_BREAD = 3;
@@ -20,28 +22,70 @@ public class OpponentSelectActivity extends AppCompatActivity {
     private static final int CLYDE_CLONE = 7;
     private static final int CARL = 8;
     private static final int CAT_PERSON = 9;
+    //character variables
     private int character = 0;
     private int opponent = 0;
+    //ImageView variable
+    ImageView playerImageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.opponent_select);
+        playerImageView = (ImageView) findViewById(R.id.playerSelectedCharacterImg);
 
-        //Bundle extras = getIntent().getExtras();
-        Log.i("INFO", "value before: " + String.valueOf(character));
         Intent extras = getIntent();
         if (extras != null) {
             character = extras.getIntExtra("playerChar", 100);
-            Log.i("INFO", "Value after: " + String.valueOf(character));
         }
+        SetPlayerImage(character);
+    }
 
-        if (character == 1) {
-            //Display Clyde as player character
-        }
-        else if (character == 2) {
-            //Display Owen as player character
-        }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("playerChar", character);
+        outState.putInt("opponentChar", opponent);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        character = (int) savedInstanceState.getInt("playerChar");
+        opponent = (int) savedInstanceState.getInt("opponentChar");
+    }
+
+    //Set player character's image
+    private void SetPlayerImage(int character) {
+        switch (character) {
+            case 1:
+                playerImageView.setImageResource(R.drawable.clyde_player);
+                break;
+            case 2:
+                playerImageView.setImageResource(R.drawable.owen_player);
+                break;
+            case 3:
+                playerImageView.setImageResource(R.drawable.super_bread_player);
+                break;
+            case 4:
+                playerImageView.setImageResource(R.drawable.scientist_player);
+                break;
+            case 5:
+                playerImageView.setImageResource(R.drawable.grim_reaper_player);
+                break;
+            case 6:
+                playerImageView.setImageResource(R.drawable.the_controller_player);
+                break;
+            case 7:
+                playerImageView.setImageResource(R.drawable.clyde_clone_player);
+                break;
+            case 8:
+                playerImageView.setImageResource(R.drawable.carl_player);
+                break;
+            case 9:
+                playerImageView.setImageResource(R.drawable.cat_person_player);
+                break;
+        }
     }
 
     //Methods for onClick events of opponent imageButtons
@@ -66,7 +110,7 @@ public class OpponentSelectActivity extends AppCompatActivity {
     public void OpponentTen(View view) {
         Random rand = new Random();
         int randomChar = rand.nextInt(9) + 1;
-        Toast.makeText(this, "Random character " + Integer.toString(randomChar) + " selected", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Random character", Toast.LENGTH_SHORT).show();
         opponent = randomChar;
     }
 
@@ -81,7 +125,7 @@ public class OpponentSelectActivity extends AppCompatActivity {
         }
         else {
             //Display "Choose an opponent" message
-            Toast.makeText(this, "Please select an opponent", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please select an opponent.", Toast.LENGTH_LONG).show();
         }
     }
 }

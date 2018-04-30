@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/cno_go_background">
-
-    <!--<GridView
-        android:id="@+id/gridViewOpponents"
-        android:layout_width="259dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:columnWidth="80dp"
-        android:gravity="center"
-        android:horizontalSpacing="5dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-
-
-    </GridView>-->
 
     <TextView
         android:id="@+id/textVs"
@@ -47,11 +27,12 @@
     <Button
         android:id="@+id/buttonPlay"
         android:layout_width="130dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:background="@color/cnoLightGrey"
         android:onClick="playMatch"
         android:text="@string/button_play"
         android:textColor="@android:color/black"
@@ -64,7 +45,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/imageSelectedCharacter"
+        android:id="@+id/playerSelectedCharacterImg"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:layout_marginBottom="16dp"
@@ -75,8 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/clyde_one" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/opponentOneImgBtn"
@@ -86,7 +66,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/clyde_opponent_icon"
         android:onClick="OpponentOne"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +83,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/owen_opponent_icon"
         android:onClick="OpponentTwo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +100,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/super_bread_opponent_icon"
         android:onClick="OpponentThree"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +117,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/scientist_opponent_icon"
         android:onClick="OpponentFour"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +134,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/grim_reaper_opponent_icon"
         android:onClick="OpponentFive"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -171,7 +151,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/the_controller_opponent_icon"
         android:onClick="OpponentSix"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -188,7 +168,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/clyde_clone_opponent_icon"
         android:onClick="OpponentSeven"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -205,7 +185,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/carl_opponent_icon"
         android:onClick="OpponentEight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -222,7 +202,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_one"
+        android:background="@drawable/cat_person_opponent_icon"
         android:onClick="OpponentNine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -239,7 +219,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/character_select_random"
+        android:background="@drawable/random_opponent_icon"
         android:onClick="OpponentTen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

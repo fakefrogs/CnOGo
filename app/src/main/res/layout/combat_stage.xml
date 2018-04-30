@@ -5,7 +5,7 @@
     android:id="@+id/combatLayoutBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cno_go_background">
+    android:background="@drawable/cno_background_one">
 
 
     <ImageView
@@ -14,13 +14,13 @@
         android:layout_height="180dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutCombatTop"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/clyde_one" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageOpponent"
@@ -28,13 +28,13 @@
         android:layout_height="180dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutCombatTop"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/cno_char_one" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/layoutCombatTop"
@@ -46,66 +46,81 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/combatTopImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/combat_bar_background"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/combat_bar" />
 
-        <ImageView
+        <TextView
+            android:id="@+id/player_health_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/combat_bar"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/playerIconImage"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="220dp"
-            android:layout_height="25dp"
+        <TextView
+            android:id="@+id/opponent_health_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/health_bar_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.153"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/opponentIconImage"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="16dp" />
-
-        <ImageView
-            android:layout_width="220dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/health_bar_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.850"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/playerIconImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/player_icon_one"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.004"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/random_player_icon" />
 
         <ImageView
             android:id="@+id/opponentIconImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginStart="8dp"
-            android:src="@drawable/opponent_icon_one"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="0dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/random_opponent_icon" />
+
 
     </android.support.constraint.ConstraintLayout>
 
@@ -124,10 +139,9 @@
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:background="@android:color/white"
-            android:text="@string/combat_info_text"
             android:textAlignment="textStart"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -136,10 +150,18 @@
         <Button
             android:id="@+id/buttonAlilityOne"
             android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/cnoLightGrey"
             android:onClick="onButtonClick"
-            android:text="@string/ability_1"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@+id/textCombatInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
@@ -147,9 +169,17 @@
         <Button
             android:id="@+id/buttonAbilityTwo"
             android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/cnoLightGrey"
             android:onClick="onButtonClick"
-            android:text="@string/ability_2"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@+id/textCombatInfo"
             app:layout_constraintEnd_toStartOf="@+id/buttonAbilityThree"
             app:layout_constraintStart_toEndOf="@+id/buttonAlilityOne"
@@ -159,62 +189,23 @@
         <Button
             android:id="@+id/buttonAbilityThree"
             android:layout_width="190dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/cnoLightGrey"
             android:onClick="onButtonClick"
-            android:text="@string/ability_3"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toTopOf="@+id/textCombatInfo"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
     </android.support.constraint.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Temporary message:Tap all three ability buttons to proceed to end match screen."
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
 
-    <TextView
-        android:id="@+id/player_health_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="16dp"
-        android:text="TextView"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutCombatTop"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/opponent_health_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        android:textColor="@android:color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutCombatTop"
-        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>

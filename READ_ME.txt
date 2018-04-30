@@ -6,6 +6,25 @@ January, 2018 -- (Expected May, 2018)
 Semester project for Mobile Apps class.
 "CnO Go" is a simple combat game based on the comic series "Clyde n Owen".
 
+//--  Project Presentation Ready Update  --//
+  --  April, 29th 2018
+  
+Application is now feature complete and ready for presentation.
+
+Application gameplay mechanics now work.  Ability One, Two, and Three fully 
+implemented.
+
+Additional features implemented:  character unlocks and medals tied to player 
+stats.  Additional player character selection screen tied to unlocks added to 
+application.
+
+Navigation and application state adjusted to help maintain character passing 
+values between activities and UI elements when leaving and returning to activities.
+
+Image resources added.  String resources added.  Color values added.  Layouts tweaked
+and adjusted.
+  
+
 //--  Your Choice Project Update  --//
   --  April, 17th 2018
   
@@ -74,35 +93,37 @@ to the MainActivity and navigating to the StatsActivity.
 //--  Development progress  --//
 
 Layouts:        Basic layouts completed.
-	To be done: layout refinements
-				layout localization
+	To be done: layout localization
 				
 Navigation: 	Basic navigation completed.
 				Fixed issue with value passings with intents
 				Refined navigation
-	To be done: adjust value passing as needed
-				further refine navigation as needed
+				Added basic state maintenance
+	To be done: 
 				
 Data storing:	Basic saved stats completed
 				Updated some stat titles and values
+				Added unlocks:  Medals and player character unlocks
 	To be done: 
-	Possible features to be added:	Medals/Awards
-									Character unlocks
 				
 
 Gameplay:		Implemented player/opponent moves with supporting methods for checking
 				character health, who's turn is next, whether victory has been achieved,
 				plus other character creation and supporting methods.
-				Implemented abilities One and Two
-	To be done: Implement ability Three
-				Refine opponent decision making
+				Implemented abilities One, Two, and Three
+	To be done: Refine character values
 
 //--  Development notes  --//
 
-Basic layout, navigation, data storage, and some gameplay implemented.
+Basic layout, navigation, data storage, and gameplay implemented.
 
-Added much of actual gameplay mechanics.  Remaining mechanics need to be implemented.
-Further refinements needed.
+Added all of actual gameplay mechanics.
+Further refinements may be needed in time with further testing.
 
 Added a stats screen as part of implementing data storage.
 This feature is mostly complete.  Further features related to stats are planned.
+
+Added unlocks tied to stats.  Medals and player character unlocks awarded based off
+player stats.  Medals added to stats screen.  Secondary player select activity added.
+MainActivity routes to new playerSelect activity when additional characters have been
+unlocked.

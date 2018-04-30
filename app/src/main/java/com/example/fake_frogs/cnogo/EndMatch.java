@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -16,14 +18,26 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
 public class EndMatch extends AppCompatActivity {
+    //Constants
+    private static  final String ONE = "1";
+    private static final String TWO = "2";
+    private static final String THREE = "3";
+    //variables
     private int player = 0;
     private int opponent = 0;
     private boolean winner = false;
+    private String[] statStrings;
+    //View variables
+    ImageView winnerImage;
+    TextView titleTextview;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.end_match);
         String statsTxt = "stats.txt";
+        winnerImage = (ImageView) findViewById(R.id.imageWinner);
+        titleTextview = (TextView) findViewById(R.id.textEndGameTitle);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -34,14 +48,50 @@ public class EndMatch extends AppCompatActivity {
 
         if (winner) {
             if (checkFile(this, statsTxt)) {
-                //Toast.makeText(this,"File found.", Toast.LENGTH_LONG).show();
-                Log.i("INFO", "File found");
                 UpdateStats();
+                updateUnlocks();
+                titleTextview.setText(R.string.victory);
+                SetWinnerImage(player);
             }
             else {
-                //Toast.makeText(this, "File not found.", Toast.LENGTH_LONG).show();
-                Log.i("ERROR", "File not found");
             }
+        }
+        else {
+            titleTextview.setText(R.string.defeat);
+            SetWinnerImage(opponent);
+        }
+    }
+
+    private void SetWinnerImage(int character) {
+        //Set winner image
+        switch (character) {
+            case 1:
+                winnerImage.setImageResource(R.drawable.clyde_player);
+                break;
+            case 2:
+                winnerImage.setImageResource(R.drawable.owen_player);
+                break;
+            case 3:
+                winnerImage.setImageResource(R.drawable.super_bread_player);
+                break;
+            case 4:
+                winnerImage.setImageResource(R.drawable.scientist_player);
+                break;
+            case 5:
+                winnerImage.setImageResource(R.drawable.grim_reaper_player);
+                break;
+            case 6:
+                winnerImage.setImageResource(R.drawable.the_controller_player);
+                break;
+            case 7:
+                winnerImage.setImageResource(R.drawable.clyde_clone_player);
+                break;
+            case 8:
+                winnerImage.setImageResource(R.drawable.carl_player);
+                break;
+            case 9:
+                winnerImage.setImageResource(R.drawable.cat_person_player);
+                break;
         }
     }
 
@@ -54,10 +104,8 @@ public class EndMatch extends AppCompatActivity {
     }
 
     protected  void UpdateStats() {
-        //Toast.makeText(this,"displayStats() called", Toast.LENGTH_LONG).show();
         String statsTxt = "stats.txt";
         FileInputStream statsInputStream;
-        String[] statStrings;
         String statString = "";
         int statValue;
 
@@ -105,7 +153,6 @@ public class EndMatch extends AppCompatActivity {
 
             //Check if statStrings has 20 strings
             if (statStrings.length == 20) {
-                //Toast.makeText(this,"statStrings contains 20 items", Toast.LENGTH_LONG).show();
                 if (statStrings[0].matches("Victories")) {
                     //Get the val of the second string in String[] -->  # of Victories
                     int victoryValue = Integer.parseInt(statStrings[1]);
@@ -113,12 +160,10 @@ public class EndMatch extends AppCompatActivity {
                     victoryValue += 1;
                     //return the val to the String[] in same location
                     statStrings[1] = Integer.toString(victoryValue);
-                    //Toast.makeText(this, "statStrings[1] updated to: " + statStrings[1], Toast.LENGTH_LONG).show();
                 }//end if statement
 
                 for (int i = 0; i < statStrings.length; i = i + 2) {
                     if (statStrings[i].matches(statString)) {
-                        //Toast.makeText(this, "Match found", Toast.LENGTH_LONG).show();
                         //assign value of the next string in the String[] as an int val
                         statValue = Integer.parseInt(statStrings[i + 1]);
                         //increase int value by one
@@ -139,14 +184,172 @@ public class EndMatch extends AppCompatActivity {
                     outputStream = openFileOutput(statsTxt, Context.MODE_PRIVATE);
                     outputStream.write(line.getBytes());
                     outputStream.close();
-                    //Toast.makeText(this,"File was saved",Toast.LENGTH_LONG).show();
-                    Log.i("INFO", "File was saved");
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }//end if statement
         } catch (Exception e) {
-            Log.e("Error", "There was an exception: " + e);
+            //Log.e("Error", "There was an exception: " + e);
+        }//end try catch block
+    }
+
+    protected void updateUnlocks() {
+        String unlocksTxt = "unlocks.txt";
+        FileInputStream unlocksInputStream;
+        String[] unlocksStrings;
+
+        //Try catch block that checks if file is there then gets unlocks values from file
+        //and adds them to a list/array
+        try {
+            //Read file contents
+            unlocksInputStream = openFileInput(unlocksTxt);
+            InputStreamReader inputStreamReader = new InputStreamReader(unlocksInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            line = bufferedReader.readLine();
+            bufferedReader.close();
+            unlocksStrings = line.split(":");
+
+            //Check if unlocksStrings has 20 strings
+            if (unlocksStrings.length == 22) {
+                if (unlocksStrings[2].matches("Victories")) {
+                    if (statStrings[1].matches(String.valueOf(50))) {
+                        unlocksStrings[3] = ONE;
+                    }
+                    else if (statStrings[1].matches(String.valueOf(100))) {
+                        unlocksStrings[3] = TWO;
+                    }
+                    else if (statStrings[1].matches(String.valueOf(200))) {
+                        unlocksStrings[3] = THREE;
+                    }
+                }
+                if (unlocksStrings[4].matches("Clyde")) {
+                    if (statStrings[3].matches(String.valueOf(10))) {
+                        unlocksStrings[5] = ONE;
+                        //unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[3].matches(String.valueOf(25))) {
+                        unlocksStrings[5] = TWO;
+                    }
+                    else if (statStrings[3].matches(String.valueOf(50))) {
+                        unlocksStrings[5] = THREE;
+                    }
+                }
+                if (unlocksStrings[6].matches("Owen")) {
+                    if (statStrings[5].matches(String.valueOf(10))) {
+                        unlocksStrings[7] = ONE;
+                        //unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[5].matches(String.valueOf(25))) {
+                        unlocksStrings[7] = TWO;
+                    }
+                    else if (statStrings[5].matches(String.valueOf(50))) {
+                        unlocksStrings[7] = THREE;
+                    }
+                }
+                if (unlocksStrings[8].matches("Super Bread")) {
+                    if (statStrings[7].matches(String.valueOf(10))) {
+                        unlocksStrings[9] = ONE;
+                        unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[7].matches(String.valueOf(25))) {
+                        unlocksStrings[9] = TWO;
+                    }
+                    else if (statStrings[7].matches(String.valueOf(50))) {
+                        unlocksStrings[9] = THREE;
+                    }
+                }
+                if (unlocksStrings[10].matches("Scientist")) {
+                    if (statStrings[9].matches(String.valueOf(10))) {
+                        unlocksStrings[11] = ONE;
+                        unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[9].matches(String.valueOf(25))) {
+                        unlocksStrings[11] = TWO;
+                    }
+                    else if (statStrings[9].matches(String.valueOf(50))) {
+                        unlocksStrings[11] = THREE;
+                    }
+                }
+                if (unlocksStrings[12].matches("Grim Reaper")) {
+                    if (statStrings[11].matches(String.valueOf(10))) {
+                        unlocksStrings[13] = ONE;
+                        unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[11].matches(String.valueOf(25))) {
+                        unlocksStrings[13] = TWO;
+                    }
+                    else if (statStrings[11].matches(String.valueOf(50))) {
+                        unlocksStrings[13] = THREE;
+                    }
+                }
+                if (unlocksStrings[14].matches("The Controller")) {
+                    if (statStrings[13].matches(String.valueOf(10))) {
+                        unlocksStrings[15] = ONE;
+                        unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[13].matches(String.valueOf(25))) {
+                        unlocksStrings[15] = TWO;
+                    }
+                    else if (statStrings[13].matches(String.valueOf(50))) {
+                        unlocksStrings[15] = THREE;
+                    }
+                }
+                if (unlocksStrings[16].matches("Clyde Clone")) {
+                    if (statStrings[15].matches(String.valueOf(10))) {
+                        unlocksStrings[17] = ONE;
+                        unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[15].matches(String.valueOf(25))) {
+                        unlocksStrings[17] = TWO;
+                    }
+                    else if (statStrings[15].matches(String.valueOf(50))) {
+                        unlocksStrings[17] = THREE;
+                    }
+                }
+                if (unlocksStrings[18].matches("Carl")) {
+                    if (statStrings[17].matches(String.valueOf(10))) {
+                        unlocksStrings[19] = ONE;
+                        unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[17].matches(String.valueOf(25))) {
+                        unlocksStrings[19] = TWO;
+                    }
+                    else if (statStrings[17].matches(String.valueOf(50))) {
+                        unlocksStrings[19] = THREE;
+                    }
+                }
+                if (unlocksStrings[20].matches("Cat Person")) {
+                    if (statStrings[19].matches(String.valueOf(10))) {
+                        unlocksStrings[21] = ONE;
+                        unlocksStrings[1] = ONE;
+                    }
+                    else if (statStrings[19].matches(String.valueOf(25))) {
+                        unlocksStrings[21] = TWO;
+                    }
+                    else if (statStrings[19].matches(String.valueOf(50))) {
+                        unlocksStrings[21] = THREE;
+                    }
+                }
+
+                line = unlocksStrings[0]+":"+unlocksStrings[1]+":"+unlocksStrings[2]+":"+unlocksStrings[3]+":"+unlocksStrings[4]+":"+
+                        unlocksStrings[5]+":"+unlocksStrings[6]+":"+unlocksStrings[7]+":"+unlocksStrings[8]+":"+unlocksStrings[9]+":"+
+                        unlocksStrings[10]+":"+unlocksStrings[11]+":"+unlocksStrings[12]+":"+unlocksStrings[13]+":"+unlocksStrings[14]+":"+
+                        unlocksStrings[15]+":"+unlocksStrings[16]+":"+unlocksStrings[17]+":"+unlocksStrings[18]+":"+unlocksStrings[19]+":"+
+                        unlocksStrings[20]+":"+unlocksStrings[21];
+
+                FileOutputStream outputStream;
+
+                try {
+                    outputStream = openFileOutput(unlocksTxt, Context.MODE_PRIVATE);
+                    outputStream.write(line.getBytes());
+                    outputStream.close();
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                }
+            }//end if statement
+        } catch (Exception e) {
+            //Log.e("Error", "There was an exception: " + e);
         }//end try catch block
     }
 

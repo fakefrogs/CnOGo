@@ -24,22 +24,18 @@ public class MatchActivity extends AppCompatActivity {
     private String playerName = "";
     private double playerHealth;
     private double playerAbilityOne;
-    private String playerAbilityOneString = "";
     private double playerAbilityTwo;
     private String playerAbilityTwoString = "";
     private boolean playerAbilityTwoActive = false;
-    private boolean playerAbilityThreeActive = false;
     private String playerAbilityThreeString = "";
     //Initialize opponent default variables
     private int opponent = 0;
     private String opponentName = "";
     private double opponentHealth;
     private double opponentAbilityOne;
-    private String opponentAbilityOneString = "";
     private double opponentAbilityTwo;
     private String opponentAbilityTwoString = "";
     private boolean opponentAbilityTwoActive = false;
-    private boolean opponentAbilityThreeActive = false;
     private String opponentAbilityThreeString = "";
     //Initialize other variables
     private boolean abilityButtonOne = false;
@@ -53,17 +49,52 @@ public class MatchActivity extends AppCompatActivity {
     private boolean playerMove = true;
     private boolean opponentMove = false;
     private String combatTextString = "";
-
+    //ability three variables
+    private String playerAbilityOneString = "";
+    private boolean playerAbilityThreeActive = false;
+    private String opponentAbilityOneString = "";
+    private boolean opponentAbilityThreeActive = false;
+    private boolean playerAttackBuffActive = false;
+    private boolean playerDefenseBuffActive = false;
+    private boolean playerAttackDebuffActive = false;
+    private boolean playerDefenseDebuffActive = false;
+    private boolean opponentAttackBuffActive = false;
+    private boolean opponentDefenseBuffActive = false;
+    private boolean opponentAttackDebuffActive = false;
+    private boolean opponentDefenseDebuffActive = false;
+    private double playerHealthBuff = 0;
+    private double opponentHealthBuff = 0;
+    private double playerAttackBuff = 0;
+    private double playerDefenseBuff = 0;
+    private double playerAttackDebuff = 0;
+    private double playerDefenseDebuff = 0;
+    private double playerActiveDefense;
+    private double opponentAttackBuff = 0;
+    private double opponentDefenseBuff = 0;
+    private double opponentAttackDebuff = 0;
+    private double opponentDefenseDebuff = 0;
+    private double opponentActiveDefense;
+    private int playerCooldown = 0;
+    private int opponentCooldown = 0;
+    //combat text string variables
+    private String used;
+    private String period;
+    private String dashes;
+    private String takes;
+    private String damage;
+    private String missed;
+    private String defensesUp;
+    private String playerDisappointmentString;
+    private String opponentDisappointmentString;
+    //View variables
     ConstraintLayout background;
     ImageView playerIconImg;
     ImageView opponentIconImg;
     ImageView playerImageView;
     ImageView opponentImageView;
-
     TextView playerHealthTextview;
     TextView opponentHealthTextview;
     TextView combatTextTextview;
-
     Button abilityOneBtn;
     Button abilityTwoBtn;
     Button abilityThreeBtn;
@@ -72,6 +103,7 @@ public class MatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.combat_stage);
+        //Initialize Views
         background = (ConstraintLayout) findViewById(R.id.combatLayoutBackground);
         playerIconImg = (ImageView) findViewById(R.id.playerIconImage);
         opponentIconImg = (ImageView) findViewById(R.id.opponentIconImage);
@@ -80,10 +112,19 @@ public class MatchActivity extends AppCompatActivity {
         playerHealthTextview = (TextView) findViewById(R.id.player_health_textview);
         opponentHealthTextview = (TextView) findViewById(R.id.opponent_health_textview);
         combatTextTextview = (TextView) findViewById(R.id.textCombatInfo);
-
         abilityOneBtn = (Button) findViewById(R.id.buttonAlilityOne);
         abilityTwoBtn = (Button) findViewById(R.id.buttonAbilityTwo);
         abilityThreeBtn = (Button) findViewById(R.id.buttonAbilityThree);
+        //Initialize text strings for combatTextString use
+        used = getString(R.string.used);
+        period = getString(R.string.period);
+        dashes = getString(R.string.dashes);
+        takes = getString(R.string.takes);
+        damage = getString(R.string.damage);
+        missed = getString(R.string.missed);
+        defensesUp = getString(R.string.defenses_up);
+        playerDisappointmentString = getString(R.string.player_ability_three_disappointment);
+        opponentDisappointmentString = getString(R.string.opponent_ability_three_disappointment);
 
         //Get passed values from intent
         Bundle extras = getIntent().getExtras();
@@ -92,218 +133,367 @@ public class MatchActivity extends AppCompatActivity {
             player = extras.getInt("playerChar");
             opponent = extras.getInt("opponent");
         }
+
         //Check to make sure player and opponent characters were chosen
         //before beginning match
-        if (player != 0 && opponent != 0) {
+        if (player != 0 || opponent != 0) {
             playerChar = new Character(player);
             opponentChar = new Character(opponent);
             //Set player variables
             playerHealth = playerChar.getCharacterHp();
             playerName = playerChar.getCharacterName();
             playerAbilityOne = playerChar.getAbilityOne();
-            playerAbilityOneString = playerChar.getAbilityOneSting();
             playerAbilityTwo = playerChar.getAbilityTwo();
-            playerAbilityTwoString = playerChar.getAbilityTwoString();
             //Set opponent variables
             opponentHealth = opponentChar.getCharacterHp();
             opponentName = opponentChar.getCharacterName();
-            opponentAbilityOne = opponentChar.getAbilityOne();
-            opponentAbilityOneString = opponentChar.getAbilityOneSting();
+            if (opponent == 5) {
+                opponentAbilityOne = opponentChar.getAbilityOne() + 10;
+            }
+            else {
+                opponentAbilityOne = opponentChar.getAbilityOne();
+            }
             opponentAbilityTwo = opponentChar.getAbilityTwo();
-            opponentAbilityTwoString = opponentChar.getAbilityTwoString();
         }
         else {
-            //If activity is called and no player and opponent values have been passed,
+            //If activity is called and no player or opponent values have been passed,
             //display error message in Toast and return app to MainActivity
             Toast.makeText(this, "No characters available.", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP );//| Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent);
         }
+
+        //Set background
         Random rand = new Random();
         int randomBackground = rand.nextInt(3) + 1;
         if (randomBackground == 1) {
-            background.setBackgroundResource(R.drawable.cno_go_background);
+            background.setBackgroundResource(R.drawable.cno_background_one);
         }
         else if (randomBackground == 2) {
-            background.setBackgroundResource(R.drawable.cno_go_background);
+            background.setBackgroundResource(R.drawable.cno_background_two);
         }
         else if (randomBackground == 3) {
-            background.setBackgroundResource(R.drawable.cno_go_background);
+            background.setBackgroundResource(R.drawable.cno_background_three);
         }
-        SetCharacterIconsAndImages(player, opponent);
+
+        //Set Character images
+        SetCharacterResources(player, opponent);
+
+        //Set starting health
         playerHealthTextview.setText(String.valueOf(playerHealth));
         opponentHealthTextview.setText(String.valueOf(opponentHealth));
+
+        //Initialize combat TextView
         combatTextTextview.setText(combatTextString);
     }
 
-    private void SetCharacterIconsAndImages(int playerIcon, int opponentIcon) {
-        switch (playerIcon) {
+
+
+    //------  Set Character Resources  ------//
+
+
+
+    private void SetCharacterResources(int player, int opponent) {
+        //Set player's images
+        switch (player) {
             case 1:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.clyde_player_icon);
+                playerImageView.setImageResource(R.drawable.clyde_player);
+                abilityOneBtn.setText(R.string.glare);
+                abilityTwoBtn.setText(R.string.ignore);
+                abilityThreeBtn.setText(R.string.passive_indifference);
+                playerAbilityOneString = getString(R.string.glare);
+                playerAbilityTwoString = getString(R.string.ignore);
+                playerAbilityThreeString = getString(R.string.passive_indifference);
                 break;
             case 2:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.owen_player_icon);
+                playerImageView.setImageResource(R.drawable.owen_player);
+                abilityOneBtn.setText(R.string.bad_jokes);
+                abilityTwoBtn.setText(R.string.friendly_smile);
+                abilityThreeBtn.setText(R.string.punishment);
+                playerAbilityOneString = getString(R.string.bad_jokes);
+                playerAbilityTwoString = getString(R.string.friendly_smile);
+                playerAbilityThreeString = getString(R.string.punishment);
                 break;
             case 3:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.super_bread_player_icon);
+                playerImageView.setImageResource(R.drawable.super_bread_player);
+                abilityOneBtn.setText(R.string.super_strength);
+                abilityTwoBtn.setText(R.string.super_flight);
+                abilityThreeBtn.setText(R.string.super_yeast);
+                playerAbilityOneString = getString(R.string.super_strength);
+                playerAbilityTwoString = getString(R.string.super_flight);
+                playerAbilityThreeString = getString(R.string.super_yeast);
                 break;
             case 4:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.scientist_player_icon);
+                playerImageView.setImageResource(R.drawable.scientist_player);
+                abilityOneBtn.setText(R.string.poke_with_a_stick);
+                abilityTwoBtn.setText(R.string.hide_behind_clipboard);
+                abilityThreeBtn.setText(R.string.scientific_lecture);
+                playerAbilityOneString = getString(R.string.poke_with_a_stick);
+                playerAbilityTwoString = getString(R.string.hide_behind_clipboard);
+                playerAbilityThreeString = getString(R.string.scientific_lecture);
                 break;
             case 5:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.grim_reaper_player_icon);
+                playerImageView.setImageResource(R.drawable.grim_reaper_player);
+                abilityOneBtn.setText(R.string.scythe);
+                abilityTwoBtn.setText(R.string.empty_cloak);
+                abilityThreeBtn.setText(R.string.immortality);
+                playerAbilityOneString = getString(R.string.scythe);
+                playerAbilityTwoString = getString(R.string.empty_cloak);
+                playerAbilityThreeString = getString(R.string.immortality);
                 break;
             case 6:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.the_controller_player_icon);
+                playerImageView.setImageResource(R.drawable.the_controller_player);
+                abilityOneBtn.setText(R.string.the_power);
+                abilityTwoBtn.setText(R.string.pause);
+                abilityThreeBtn.setText(R.string.rewind);
+                playerAbilityOneString = getString(R.string.the_power);
+                playerAbilityTwoString = getString(R.string.pause);
+                playerAbilityThreeString = getString(R.string.rewind);
                 break;
             case 7:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.clyde_clone_player_icon);
+                playerImageView.setImageResource(R.drawable.clyde_clone_player);
+                abilityOneBtn.setText(R.string.scheme);
+                abilityTwoBtn.setText(R.string.impersonate);
+                abilityThreeBtn.setText(R.string.clone_o_max);
+                playerAbilityOneString = getString(R.string.scheme);
+                playerAbilityTwoString = getString(R.string.impersonate);
+                playerAbilityThreeString = getString(R.string.clone_o_max);
                 break;
             case 8:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.carl_player_icon);
+                playerImageView.setImageResource(R.drawable.carl_player);
+                abilityOneBtn.setText(R.string.awkwardness);
+                abilityTwoBtn.setText(R.string.sofa_cushion);
+                abilityThreeBtn.setText(R.string.forgotten_about);
+                playerAbilityOneString = getString(R.string.awkwardness);
+                playerAbilityTwoString = getString(R.string.sofa_cushion);
+                playerAbilityThreeString = getString(R.string.forgotten_about);
                 break;
             case 9:
-                playerIconImg.setImageResource(R.drawable.player_icon_one);
-                playerImageView.setImageResource(R.drawable.clyde_one);
+                playerIconImg.setImageResource(R.drawable.cat_person_player_icon);
+                playerImageView.setImageResource(R.drawable.cat_person_player);
+                abilityOneBtn.setText(R.string.hairball);
+                abilityTwoBtn.setText(R.string.superiority);
+                abilityThreeBtn.setText(R.string.judging_stare);
+                playerAbilityOneString = getString(R.string.hairball);
+                playerAbilityTwoString = getString(R.string.superiority);
+                playerAbilityThreeString = getString(R.string.judging_stare);
                 break;
         }
-
-        switch (opponentIcon) {
+        //set opponent's images
+        switch (opponent) {
             case 1:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.clyde_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.clyde_opponent);
+                opponentAbilityOneString = getString(R.string.glare);
+                opponentAbilityTwoString = getString(R.string.ignore);
+                opponentAbilityThreeString = getString(R.string.passive_indifference);
                 break;
             case 2:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.owen_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.owen_opponent);
+                opponentAbilityOneString = getString(R.string.bad_jokes);
+                opponentAbilityTwoString = getString(R.string.friendly_smile);
+                opponentAbilityThreeString = getString(R.string.punishment);
                 break;
             case 3:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.super_bread_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.super_bread_opponent);
+                opponentAbilityOneString = getString(R.string.super_strength);
+                opponentAbilityTwoString = getString(R.string.super_flight);
+                opponentAbilityThreeString = getString(R.string.super_yeast);
                 break;
             case 4:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.scientist_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.scientist_opponent);
+                opponentAbilityOneString = getString(R.string.poke_with_a_stick);
+                opponentAbilityTwoString = getString(R.string.hide_behind_clipboard);
+                opponentAbilityThreeString = getString(R.string.scientific_lecture);
                 break;
             case 5:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.grim_reaper_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.grim_reaper_opponent);
+                opponentAbilityOneString = getString(R.string.scythe);
+                opponentAbilityTwoString = getString(R.string.empty_cloak);
+                opponentAbilityThreeString = getString(R.string.immortality);
                 break;
             case 6:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.the_controller_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.the_controller_opponent);
+                opponentAbilityOneString = getString(R.string.the_power);
+                opponentAbilityTwoString = getString(R.string.pause);
+                opponentAbilityThreeString = getString(R.string.rewind);
                 break;
             case 7:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.clyde_clone_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.clyde_clone_opponent);
+                opponentAbilityOneString = getString(R.string.scheme);
+                opponentAbilityTwoString = getString(R.string.impersonate);
+                opponentAbilityThreeString = getString(R.string.clone_o_max);
                 break;
             case 8:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.carl_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.carl_opponent);
+                opponentAbilityOneString = getString(R.string.awkwardness);
+                opponentAbilityTwoString = getString(R.string.sofa_cushion);
+                opponentAbilityThreeString = getString(R.string.forgotten_about);
                 break;
             case 9:
-                opponentIconImg.setImageResource(R.drawable.opponent_icon_one);
-                opponentImageView.setImageResource(R.drawable.owen_one);
+                opponentIconImg.setImageResource(R.drawable.cat_person_opponent_icon);
+                opponentImageView.setImageResource(R.drawable.cat_person_opponent);
+                opponentAbilityOneString = getString(R.string.hairball);
+                opponentAbilityTwoString = getString(R.string.superiority);
+                opponentAbilityThreeString = getString(R.string.judging_stare);
                 break;
         }
     }
+
+
+
+    //------  Button Click ------//
+
+
 
     public void onButtonClick(View view) {
         switch (view.getId()) {
             case R.id.buttonAlilityOne:
-                /*handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        combatTextString = playerName + " used " + playerAbilityOneString + "...";
-                        combatTextTextview.setText(combatTextString);
-                    }
-                }, 3000);*/
                 abilityButtonOne = true;
                 abilityButtonTwo = false;
                 abilityButtonThree = false;
-
-                //Log.i("INFO", "Ability one selected");
                 break;
             case R.id.buttonAbilityTwo:
-                /*handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        combatTextString = playerName + " used " + playerAbilityTwoString + "...";
-                        combatTextTextview.setText(combatTextString);
-                    }
-                }, 3000);*/
                 abilityButtonOne = false;
                 abilityButtonTwo = true;
                 abilityButtonThree = false;
-
-                //Log.i("INFO", "Ability two selected");
                 break;
             case R.id.buttonAbilityThree:
-                /*handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        combatTextString = playerName + " used " + playerAbilityThreeString + "...";
-                        combatTextTextview.setText(combatTextString);
-                    }
-                }, 3000);*/
                 abilityButtonOne = false;
                 abilityButtonTwo = false;
                 abilityButtonThree = true;
-
-                //Log.i("INFO", "Ability three selected");
                 break;
         }
         disableButtons();
-        Log.i("INFO", "Calling PlayerMove()");
         PlayerMove();
+    }
+
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putDouble("playerHealth", playerHealth);
+        outState.putDouble("opponentHealth", opponentHealth);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        playerHealth = (Double) savedInstanceState.getDouble("playerHealth");
+        opponentHealth = (Double) savedInstanceState.getDouble("opponentHealth");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        playerHealthTextview.setText(String.valueOf(playerHealth));
+        opponentHealthTextview.setText(String.valueOf(opponentHealth));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        playerHealthTextview.setText(String.valueOf(playerHealth));
+        opponentHealthTextview.setText(String.valueOf(opponentHealth));
     }
+
+    //------  Enable and disable buttons  ------//
+
+
 
     private void enableButtons() {
         abilityOneBtn.setEnabled(true);
         abilityTwoBtn.setEnabled(true);
         abilityThreeBtn.setEnabled(true);
+        abilityOneBtn.setBackgroundColor(getResources().getColor(R.color.cnoLightGrey));
+        abilityTwoBtn.setBackgroundColor(getResources().getColor(R.color.cnoLightGrey));
+        abilityThreeBtn.setBackgroundColor(getResources().getColor(R.color.cnoLightGrey));
     }
 
     private  void disableButtons() {
         abilityOneBtn.setEnabled(false);
         abilityTwoBtn.setEnabled(false);
         abilityThreeBtn.setEnabled(false);
+        abilityOneBtn.setBackgroundColor(getResources().getColor(R.color.cnoSteelGrey));
+        abilityTwoBtn.setBackgroundColor(getResources().getColor(R.color.cnoSteelGrey));
+        abilityThreeBtn.setBackgroundColor(getResources().getColor(R.color.cnoSteelGrey));
     }
+
+
+
+    //------  Player Move  ------//
+
+
 
     private void PlayerMove() {
         //Processes done during player's move
-        //Log.i("INFO", "PlayerMove() called");
         double activeDamageDealt;
         double encounteredDefense;
         combatTextTextview.setText("");
+
+        //Determine which ability button was pressed and do said ability
         if (abilityButtonOne) {
-            /*handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    combatTextString = playerName + " used " + playerAbilityOneString + "...";
-                    combatTextTextview.setText(combatTextString);
-                }
-            }, 3000);*/
-            //Check for buffs/debuffs   to be implemented later along with ability three
             //get hit chance and apply to active damage
             activeDamageDealt = hitChance(playerAbilityOne);
+             //check for player attack buffs
+            if (playerAbilityThreeActive) {
+                if (playerAttackBuffActive) {
+                    double playerAbilOne = activeDamageDealt;
+                    playerAbilOne = playerAbilOne + playerAttackBuff;
+                    if(playerAttackBuffActive && playerDefenseBuffActive ) {
+                        playerAttackBuffActive = false;
+                    }
+                    else {
+                        playerAttackBuffActive = false;
+                        playerAbilityThreeActive = false;
+                    }
+                    //apply player attack buff to active damage;
+                    activeDamageDealt = playerAbilOne;
+                }
+            }
+
+            //Check for opponent attack debuffs
+            if (opponentAbilityThreeActive) {
+                if (opponentAttackDebuffActive) {
+                    double playerAbilOne = activeDamageDealt;
+                    if (playerAttackDebuff == 0) {
+                        playerAbilOne = playerAttackDebuff;
+                    }
+                    else {
+                        playerAbilOne = playerAbilOne + playerAttackDebuff;
+                    }
+                    if (opponentAttackDebuffActive && opponentDefenseDebuffActive) {
+                        opponentAttackDebuffActive = false;
+                    }
+                    else {
+                        opponentAttackDebuffActive = false;
+                        opponentAbilityThreeActive = false;
+                    }
+                    //apply opponent attack debuff to active damage;
+                    activeDamageDealt = playerAbilOne;
+                }
+            }
+
             //Check to see if opponent has an active defense up and how strong it will be
             if (opponentAbilityTwoActive) {
-                encounteredDefense = defenseChance(opponentAbilityTwo);
+                encounteredDefense = defenseChance(opponentActiveDefense);
             }
             else {
                 encounteredDefense = 0;
@@ -311,37 +501,56 @@ public class MatchActivity extends AppCompatActivity {
             //Determine opponent's health after attack is made
             if ((activeDamageDealt - encounteredDefense) > 0) {
                 opponentHealth = opponentHealth - (activeDamageDealt - encounteredDefense);
-                combatTextString = playerName + " deals: " + (activeDamageDealt - encounteredDefense) + " damage to " + opponentName;
+                combatTextString = playerName + used + playerAbilityOneString + dashes +
+                        opponentName + takes + (activeDamageDealt - encounteredDefense) + damage;
             }
             else {
-                combatTextString = playerName + " deals: " + 0.0 + " damage to " + opponentName;
+                combatTextString = playerName + used + playerAbilityOneString + missed;
             }
             combatTextTextview.setText(combatTextString);
         }
         else if (abilityButtonTwo) {
-            /*handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    combatTextString = playerName + " used " + playerAbilityTwoString + "...";
-                    combatTextTextview.setText(combatTextString);
+            if (playerAbilityThreeActive) {
+                if (playerDefenseBuffActive) {
+                    double playerAbilTwo = playerAbilityTwo;
+                    playerAbilTwo = playerAbilTwo + playerDefenseBuff;
+                    playerDefenseBuffActive = false;
+                    playerAbilityThreeActive = false;
+                    //Apply player defense buff
+                    playerActiveDefense = playerAbilTwo;
                 }
-            }, 3000);*/
-            //Check for buffs/debuffs
+            }
+            else {
+                playerActiveDefense = playerAbilityTwo;
+            }
+
+            if (opponentAbilityThreeActive) {
+                if (opponentDefenseDebuffActive) {
+                    double playerAbilTwo = playerActiveDefense;
+                    if (playerDefenseDebuff == 0) {
+                        playerAbilTwo = playerDefenseDebuff;
+                    }
+                    else {
+                        playerAbilTwo = playerAbilTwo + playerDefenseDebuff;
+                    }
+                    opponentDefenseDebuffActive = false;
+                    opponentAbilityThreeActive = false;
+                    //Apply opponent defense debuff
+                    playerActiveDefense = playerAbilTwo;
+                }
+            }
             playerAbilityTwoActive = true;
-            combatTextString = playerName + "'s defenses are up.";
+            combatTextString = playerName + used + playerAbilityTwoString + dashes + playerName + defensesUp;
             combatTextTextview.setText(combatTextString);
         }
         else if (abilityButtonThree) {
-            /*handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    combatTextString = playerName + " used " + playerAbilityThreeString + "...";
-                    combatTextTextview.setText(combatTextString);
-                }
-            }, 3000);*/
-            //To be implemented later along with ability three
-            combatTextString = "Nothing happened!  What a disappointment.";
+            AbilityThree(player, player);
+            //combatTextString = playerName + " used " + playerAbilityThreeString;
             combatTextTextview.setText(combatTextString);
+        }
+        //Check if there is a cooldown active and increment it down 1
+        if(playerCooldown > 0) {
+            playerCooldown = playerCooldown - 1;
         }
         playerMove = false;
         opponentMove = true;
@@ -352,33 +561,72 @@ public class MatchActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Log.i("INFO", "Calling CheckHP()");
                 CheckHP();
             }
         }, 3000);
     }
 
+
+
+    //------  Opponent Move  ------//
+
+
+
     private void OpponentMove() {
         //Processes done during opponent's move
-        //Log.i("INFO", "OpponentMove() called");
         double activeDamageDealt;
         double encounteredDefense;
         combatTextTextview.setText("");
+        //Determine which ability the opponent will use
         DecisionStructure();
         if (abilityOne) {
-            /*handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    combatTextString = opponentName + " used " + opponentAbilityOneString + "...";
-                    combatTextTextview.setText(combatTextString);
-                }
-            }, 3000);*/
-            //Check for buffs/debuffs   to be implemented later along with ability three
             //get hit chance and apply to active damage
             activeDamageDealt = hitChance(opponentAbilityOne);
+            //check for opponent attack buffs
+            if (opponentAbilityThreeActive) {
+                if (opponentAttackBuffActive) {
+                    //double opponentAbilOne = opponentAbilityOne;
+                    double opponentAbilOne = activeDamageDealt;
+                    opponentAbilOne = opponentAbilOne + opponentAttackBuff;
+                    if (opponentAttackBuffActive && opponentDefenseBuffActive) {
+                        opponentAttackBuffActive = false;
+                    }
+                    else {
+                        opponentAttackBuffActive = false;
+                        opponentAbilityThreeActive = false;
+                    }
+                    //apply player attack buff to active damage;
+                    //activeDamageDealt = activeDamageDealt + opponentAbilOne;
+                    activeDamageDealt = opponentAbilOne;
+                }
+            }
+
+            //Check for player attack debuffs
+            if (playerAbilityThreeActive) {
+                if (playerAttackDebuffActive) {
+                    double opponentAbilOne = activeDamageDealt;
+                    if (opponentAttackDebuff == 0) {
+                        opponentAbilOne = opponentAttackDebuff;
+                    }
+                    else {
+                        opponentAbilOne = opponentAbilOne + opponentAttackDebuff;
+                    }
+                    if (playerAttackDebuffActive && playerDefenseDebuffActive) {
+                        playerAttackDebuffActive = false;
+                    }
+                    else {
+                        playerAttackDebuffActive = false;
+                        playerAbilityThreeActive = false;
+                    }
+                    //apply opponent attack debuff to active damage;
+                    //activeDamageDealt = activeDamageDealt + opponentAbilOne;
+                    activeDamageDealt = opponentAbilOne;
+                }
+            }
+
             //Check to see if player has an active defense up and how strong it will be
             if (playerAbilityTwoActive) {
-                encounteredDefense = defenseChance(playerAbilityTwo);
+                encounteredDefense = defenseChance(playerActiveDefense);
             }
             else {
                 encounteredDefense = 0;
@@ -386,38 +634,58 @@ public class MatchActivity extends AppCompatActivity {
             //Determine opponent's health after attack is made
             if ((activeDamageDealt - encounteredDefense) > 0) {
                 playerHealth = playerHealth - (activeDamageDealt - encounteredDefense);
-                combatTextString = opponentName + " deals: " + (activeDamageDealt - encounteredDefense) + " damage to " + playerName;
+                combatTextString = opponentName + used + opponentAbilityOneString + dashes +
+                        playerName + takes + (activeDamageDealt - encounteredDefense) + damage;
             }
             else {
-                combatTextString = opponentName + " deals: " + 0.0 + " damage to " + playerName;
+                combatTextString = opponentName + used + opponentAbilityOneString + missed;
             }
-
             combatTextTextview.setText(combatTextString);
         }
         else if (abilityTwo) {
-            /*handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    combatTextString = opponentName + " used " + opponentAbilityTwoString + "...";
-                    combatTextTextview.setText(combatTextString);
+            if (opponentAbilityThreeActive) {
+                if (opponentDefenseBuffActive) {
+                    double opponentAbilTwo = opponentAbilityTwo;
+                    opponentAbilTwo = opponentAbilTwo + opponentDefenseBuff;
+                    opponentDefenseBuffActive = false;
+                    opponentAbilityThreeActive = false;
+                    //Apply player defense buff
+                    opponentActiveDefense = opponentAbilTwo;
                 }
-            }, 3000);*/
-            //Check for buffs/debuffs
+            }
+            else {
+                opponentActiveDefense = opponentAbilityTwo;
+            }
+
+            if (playerAbilityThreeActive) {
+                if (playerDefenseDebuffActive) {
+                    double opponentAbilTwo = opponentActiveDefense;
+                    if (opponentDefenseDebuff == 0) {
+                        opponentAbilTwo = opponentDefenseDebuff;
+                    }
+                    else {
+                        opponentAbilTwo = opponentAbilTwo + opponentDefenseDebuff;
+                    }
+                    playerDefenseDebuffActive = false;
+                    playerAbilityThreeActive = false;
+                    //Apply opponent defense debuff
+                    opponentActiveDefense = opponentAbilTwo;
+                }
+            }
+            /*else {
+                opponentActiveDefense = opponentAbilityTwo;
+            }*/
+
             opponentAbilityTwoActive = true;
-            combatTextString = opponentName + "'s defenses are up.";
+            combatTextString = opponentName + used + opponentAbilityTwoString + dashes + opponentName + defensesUp;
             combatTextTextview.setText(combatTextString);
         }
         else if (abilityThree) {
-            /*handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    combatTextString = opponentName + " used " + opponentAbilityThreeString + "...";
-                    combatTextTextview.setText(combatTextString);
-                }
-            }, 3000);*/
-            //To be implemented later along with ability three
-            combatTextString = "Nothing happened!  What a relief.";
+            AbilityThree(opponent, opponent);
             combatTextTextview.setText(combatTextString);
+        }
+        if(opponentCooldown > 0) {
+            opponentCooldown = opponentCooldown - 1;
         }
         playerMove = true;
         opponentMove = false;
@@ -428,23 +696,209 @@ public class MatchActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Log.i("INFO", "Calling CheckHP()");
                 CheckHP();
             }
         }, 3000);
     }
 
-    /*
-    private void PlayerAbilityThree() {
+
+
+    //------  Ability Three  ------//
+
+
+
+    private void AbilityThree(int character, int callingCharacter) {
         //Ability three traits
+        if (callingCharacter == player) {
+            switch (character) {
+                case 1:
+                    //opponentAttackDebuff = -100;
+                    opponentAttackDebuff = 0;
+                    playerAttackDebuffActive = true;
+                    playerAbilityThreeActive = true;
+                    combatTextString = playerName + used + playerAbilityThreeString + period;
+                    break;
+                case 2:
+                    opponentAttackDebuff = -2;
+                    opponentDefenseDebuff = -2;
+                    playerAttackDebuffActive = true;
+                    playerDefenseDebuffActive = true;
+                    playerAbilityThreeActive = true;
+                    combatTextString = playerName + used + playerAbilityThreeString + period;
+                    break;
+                case 3:
+                    playerAttackBuff = 3;
+                    playerDefenseBuff = 3;
+                    playerAttackBuffActive = true;
+                    playerDefenseBuffActive = true;
+                    playerAbilityThreeActive = true;
+                    combatTextString = playerName + used + playerAbilityThreeString + period;
+                    break;
+                case 4:
+                    if (playerCooldown == 0) {
+                        playerCooldown = 4;
+                        opponentHealth += -10;
+                        opponentHealthTextview.setText(String.valueOf(opponentHealth));
+                        combatTextString = playerName + used + playerAbilityThreeString + period;
+                    }
+                    else {
+                        combatTextString = playerName + used + playerAbilityThreeString + period + playerDisappointmentString;
+                    }
+                    break;
+                case 5:
+                    if (playerCooldown == 0) {
+                        playerCooldown = 20;
+                        playerHealth = 99;
+                        playerHealthTextview.setText(String.valueOf(playerHealth));
+                        combatTextString = playerName + used + playerAbilityThreeString + period;
+                    }
+                    else {
+                        combatTextString = playerName + used + playerAbilityThreeString + period + playerDisappointmentString;
+                    }
+                    break;
+                case 6:
+                    if (playerCooldown == 0) {
+                        playerCooldown = 4;
+                        playerHealth = playerHealth + 10;
+                        combatTextString = playerName + used + playerAbilityThreeString + period;
+                        if (playerHealth > 100) {
+                            playerHealth = 100;
+                        }
+                    }
+                    else {
+                        combatTextString = playerName + used + playerAbilityThreeString + period + playerDisappointmentString;
+                    }
+                    break;
+                case 7:
+                    if (playerCooldown == 0) {
+                        playerCooldown = 5;
+                        playerHealthBuff = .5;
+                        playerHealth = playerHealth + ((100 - playerHealth) * playerHealthBuff);
+                        combatTextString = playerName + used + playerAbilityThreeString + period;
+                    }
+                    else {
+                        combatTextString = playerName + used + playerAbilityThreeString + period + playerDisappointmentString;
+                    }
+                    break;
+                case 8:
+                    //opponentDefenseDebuff = -100;
+                    //opponentAttackDebuff = -100;
+                    opponentDefenseDebuff = 0;
+                    opponentAttackDebuff = 0;
+                    playerAttackDebuffActive = true;
+                    playerDefenseDebuffActive = true;
+                    playerAbilityThreeActive = true;
+                    combatTextString = playerName + used + playerAbilityThreeString + period;
+                    break;
+                case 9:
+                    opponentDefenseDebuff = -4;
+                    playerAttackBuff = 3;
+                    playerDefenseDebuffActive = true;
+                    playerAttackBuffActive = true;
+                    playerAbilityThreeActive = true;
+                    combatTextString = playerName + used + playerAbilityThreeString + period;
+                    break;
+            }
+        }
+        else if(callingCharacter == opponent) {
+            switch (character) {
+                case 1:
+                    //playerAttackDebuff = -100;
+                    playerAttackDebuff = 0;
+                    opponentAttackDebuffActive = true;
+                    opponentAbilityThreeActive = true;
+                    combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                    break;
+                case 2:
+                    playerAttackDebuff = -2;
+                    playerDefenseDebuff = -2;
+                    opponentAttackDebuffActive = true;
+                    opponentDefenseDebuffActive = true;
+                    opponentAbilityThreeActive = true;
+                    combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                    break;
+                case 3:
+                    opponentAttackBuff = 3;
+                    opponentDefenseBuff = 3;
+                    opponentAttackBuffActive = true;
+                    opponentDefenseBuffActive = true;
+                    opponentAbilityThreeActive = true;
+                    combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                    break;
+                case 4:
+                    if (opponentCooldown == 0) {
+                        opponentCooldown = 4;
+                        playerHealth += -10;
+                        playerHealthTextview.setText(String.valueOf(playerHealth));
+                        combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                    }
+                    else {
+                        combatTextString = opponentName + used + opponentAbilityThreeString + period + opponentDisappointmentString;
+                    }
+                    break;
+                case 5:
+                    if (opponentCooldown == 0) {
+                        opponentCooldown = 20;
+                        opponentHealth = 99;
+                        opponentHealthTextview.setText(String.valueOf(opponentHealth));
+                        combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                    }
+                    else {
+                        combatTextString = opponentName + used + opponentAbilityThreeString + period + opponentDisappointmentString;
+                    }
+                    break;
+                case 6:
+                    if (opponentCooldown == 0) {
+                        opponentCooldown = 2;
+                        opponentHealth = opponentHealth + 10;
+                        combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                        if (opponentHealth > 100) {
+                            opponentHealth = 100;
+                        }
+                    }
+                    else {
+                        combatTextString = opponentName + used + opponentAbilityThreeString + period + opponentDisappointmentString;
+                    }
+                    break;
+                case 7:
+                    if (opponentCooldown == 0) {
+                        opponentCooldown = 5;
+                        opponentHealthBuff = .5;
+                        opponentHealth = opponentHealth + ((100 - opponentHealth) * opponentHealthBuff);
+                        combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                    }
+                    else {
+                        combatTextString = opponentName + used + opponentAbilityThreeString + period + opponentDisappointmentString;
+                    }
+                    break;
+                case 8:
+                    //playerDefenseDebuff = -100;
+                    //playerAttackDebuff = -100;
+                    playerDefenseDebuff = 0;
+                    playerAttackDebuff = 0;
+                    opponentAttackDebuffActive = true;
+                    opponentDefenseDebuffActive = true;
+                    opponentAbilityThreeActive = true;
+                    combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                    break;
+                case 9:
+                    playerDefenseDebuff = -4;
+                    opponentAttackBuff = 3;
+                    opponentDefenseDebuffActive = true;
+                    opponentAttackBuffActive = true;
+                    opponentAbilityThreeActive = true;
+                    combatTextString = opponentName + used + opponentAbilityThreeString + period;
+                    break;
+            }
+        }
     }
 
-    private void OpponentAbilityThree() {
-        //Ability three traits
-    }
-    /*
 
-     */
+
+    //------  Hit Chance  ------//
+
+
+
     private double hitChance(double abilityUno) {
         Random rand = new Random();
         int chanceOdd = rand.nextInt(100) + 1;
@@ -468,6 +922,12 @@ public class MatchActivity extends AppCompatActivity {
         return abilityUno;
     }
 
+
+
+    //------  Defense Chance  ------//
+
+
+
     private double defenseChance( double abilityDos) {
         Random rand = new Random();
         int chanceOdd = rand.nextInt(100) + 1;
@@ -490,9 +950,12 @@ public class MatchActivity extends AppCompatActivity {
         return abilityDos;
     }
 
-    //Method used by opponent to determine which abillity to use
-    //Need to have this customized for each opponent character for unique chances of
-    //using each ability.
+
+
+    //------  Opponent Decision Structure  ------//
+
+
+
     private void DecisionStructure() {
         //Choose which ability the opponent uses
         Random rand = new Random();
@@ -517,55 +980,67 @@ public class MatchActivity extends AppCompatActivity {
         }
     }
 
-    //Method to check player and opponent health
+
+
+    //------  Check Health Points  ------//
+
+
+
     private void CheckHP() {
         //Log.i("INFO", "CheckHP() called");
         if (playerHealth <= 0) {
             victory = true;
             playerWinner = false;
-            //Log.i("INFO", "calling Victory()");
             Victory();
         }
         else if (opponentHealth <= 0) {
             victory = true;
             playerWinner = true;
-            //Log.i("INFO", "calling Victory()");
             Victory();
         }
         else {
             victory = false;
             playerWinner = false;
-            //Log.i("INFO", "calling Victory()");
             Victory();
         }
     }
 
-    //Method used to determine victory
+
+
+    //------  Victory Check  ------//
+
+
+
     private void Victory() {
-        //Log.i("INFO", "Victory() called");
         if (victory) {
-            //Log.i("INFO", "calling EndMatch()");
             EndMatch();
         }
         else {
-            //Log.i("INFO", "calling NextMove()");
             NextMove();
         }
     }
 
-    //Method used to begin next move
+
+
+    //------  Next Move  ------//
+
+
+
     private void NextMove() {
-        //Log.i("INFO", "NextMove() called");
         if (playerMove) {
             enableButtons();
         }
         else {
-            //Log.i("INFO", "calling OpponentMove()");
             OpponentMove();
         }
     }
 
-    //Method used to end the match and start EndMatch activity
+
+
+    //------  End Match  ------//
+
+
+
     private void EndMatch() {
         Intent intent = new Intent(this, EndMatch.class);
         intent.putExtra("playerChar", player);
@@ -574,6 +1049,4 @@ public class MatchActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
-
 }

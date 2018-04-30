@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="cnoOffWhite">#f5f5f5</color>
+    <color name="cnoLightGrey">#e1e5e8</color>
+    <color name="cnoGrey">#c2c2c2</color>
+    <color name="cnoSteelGrey">#8f8f8f</color>
+    <color name="cnoDarkGrey">#7f888f</color>
 </resources>
