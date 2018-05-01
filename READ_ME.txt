@@ -6,6 +6,12 @@ January, 2018 -- (Expected May, 2018)
 Semester project for Mobile Apps class.
 "CnO Go" is a simple combat game based on the comic series "Clyde n Owen".
 
+//--  Project Completion Update  --//
+  --  April, 30th 2018
+  
+Layout localization recieved small update.
+  
+
 //--  Project Presentation Ready Update  --//
   --  April, 29th 2018
   
@@ -93,12 +99,13 @@ to the MainActivity and navigating to the StatsActivity.
 //--  Development progress  --//
 
 Layouts:        Basic layouts completed.
-	To be done: layout localization
+				Localization updated.
+	To be done: 
 				
 Navigation: 	Basic navigation completed.
-				Fixed issue with value passings with intents
-				Refined navigation
-				Added basic state maintenance
+				Fixed issue with value passings with intents.
+				Refined navigation.
+				Added basic state maintenance.
 	To be done: 
 				
 Data storing:	Basic saved stats completed

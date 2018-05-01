@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cno_go_background"
+    tools:context="com.example.fake_frogs.cnogo.StatsActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="450dp"
+        android:layout_height="260dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/cnoDarkGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/returnBtn"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/cnoGrey"
+            android:onClick="backToCharactersFromStats"
+            android:text="@string/return_back"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/victoriesTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/clydeTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/victoriesTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/owenTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clydeTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/superBreadTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/owenTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/scientistTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/superBreadTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/grimReaperTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scientistTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/theControllerTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/grimReaperTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/clydeCloneTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/theControllerTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/carlTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clydeCloneTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/catPersonTitle"
+            android:layout_width="120dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carlTitle"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/victoriesValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/victoriesTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/clydeValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/clydeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/victoriesValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/owenValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/owenTitle"
+            app:layout_constraintTop_toBottomOf="@+id/clydeValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/superBreadValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/superBreadTitle"
+            app:layout_constraintTop_toBottomOf="@+id/owenValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/scientistValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/scientistTitle"
+            app:layout_constraintTop_toBottomOf="@+id/superBreadValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/grimReaperValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/grimReaperTitle"
+            app:layout_constraintTop_toBottomOf="@+id/scientistValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/theControllerValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/theControllerTitle"
+            app:layout_constraintTop_toBottomOf="@+id/grimReaperValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/clydeCloneValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/clydeCloneTitle"
+            app:layout_constraintTop_toBottomOf="@+id/theControllerValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/carlValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="196dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/carlTitle"
+            app:layout_constraintTop_toBottomOf="@+id/clydeCloneValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/catPersonValue"
+            android:layout_width="100dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/catPersonTitle"
+            app:layout_constraintTop_toBottomOf="@+id/carlValue"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/victoriesMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/victoriesValue"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/clydeMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/clydeValue"
+            app:layout_constraintTop_toBottomOf="@+id/victoriesMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/owenMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/owenValue"
+            app:layout_constraintTop_toBottomOf="@+id/clydeMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/superBreadMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/superBreadValue"
+            app:layout_constraintTop_toBottomOf="@+id/owenMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/scientistMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/scientistValue"
+            app:layout_constraintTop_toBottomOf="@+id/superBreadMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/grimReaperMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/grimReaperValue"
+            app:layout_constraintTop_toBottomOf="@+id/scientistMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/theControllerMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/theControllerValue"
+            app:layout_constraintTop_toBottomOf="@+id/grimReaperMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/clydeCloneMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/clydeCloneValue"
+            app:layout_constraintTop_toBottomOf="@+id/theControllerMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/carlMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/carlValue"
+            app:layout_constraintTop_toBottomOf="@+id/clydeCloneMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+        <ImageView
+            android:id="@+id/catPersonMedalsImageview"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/catPersonValue"
+            app:layout_constraintTop_toBottomOf="@+id/carlMedalsImageview"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/medals_locked" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
